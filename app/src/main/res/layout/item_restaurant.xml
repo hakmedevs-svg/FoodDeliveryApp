@@ -17,7 +17,7 @@
             android:id="@+id/restaurantName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Restaurant Name"
+            android:text="Restaurant name"
             android:textColor="@color/text_primary"
             android:textSize="22sp"
             android:textStyle="bold" />
@@ -32,17 +32,6 @@
             android:textSize="14sp" />
 
         <TextView
-            android:id="@+id/restaurantRating"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:background="@color/accent"
-            android:padding="8dp"
-            android:text="★ 4.0"
-            android:textColor="@color/white"
-            android:textStyle="bold" />
-
-        <TextView
             android:id="@+id/restaurantInfo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -50,6 +39,15 @@
             android:text="Delivery time"
             android:textColor="@color/text_primary"
             android:textSize="16sp" />
+
+        <Button
+            android:id="@+id/orderButton"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_marginTop="12dp"
+            android:backgroundTint="@color/primary"
+            android:text="@string/order_now"
+            android:textColor="@color/white" />
 
     </LinearLayout>
 

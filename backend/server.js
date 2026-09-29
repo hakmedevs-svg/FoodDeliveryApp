@@ -11,13 +11,10 @@ const PORT = process.env.PORT || 3000;
 app.use(cors());
 app.use(express.json());
 
-// Example: initialize Firebase Admin SDK if service account is configured.
 if (process.env.FIREBASE_PROJECT_ID) {
-  const serviceAccount = process.env.FIREBASE_SERVICE_ACCOUNT_PATH
-    ? require(path.resolve(process.cwd(), process.env.FIREBASE_SERVICE_ACCOUNT_PATH))
-    : null;
-
-  if (serviceAccount) {
+  const serviceAccountPath = process.env.FIREBASE_SERVICE_ACCOUNT_PATH;
+  if (serviceAccountPath) {
+    const serviceAccount = require(path.resolve(process.cwd(), serviceAccountPath));
     admin.initializeApp({
       credential: admin.credential.cert(serviceAccount),
       databaseURL: `https://${process.env.FIREBASE_PROJECT_ID}.firebaseio.com`
@@ -25,13 +22,8 @@ if (process.env.FIREBASE_PROJECT_ID) {
   }
 }
 
-const governorates = JSON.parse(
-  fs.readFileSync(path.join(__dirname, 'data', 'governorates.json'), 'utf8')
-);
-
-const restaurants = JSON.parse(
-  fs.readFileSync(path.join(__dirname, 'data', 'restaurants.json'), 'utf8')
-);
+const governorates = JSON.parse(fs.readFileSync(path.join(__dirname, 'data', 'governorates.json'), 'utf8'));
+const restaurants = JSON.parse(fs.readFileSync(path.join(__dirname, 'data', 'restaurants.json'), 'utf8'));
 
 app.get('/api/health', (req, res) => {
   res.json({ status: 'ok', service: 'food-delivery-backend' });
@@ -63,12 +55,7 @@ app.post('/api/orders', (req, res) => {
   }
   return res.status(201).json({
     message: 'Order accepted',
-    order: {
-      userPhone,
-      restaurantId,
-      items,
-      status: 'pending'
-    }
+    order: { userPhone, restaurantId, items, status: 'pending' }
   });
 });
 

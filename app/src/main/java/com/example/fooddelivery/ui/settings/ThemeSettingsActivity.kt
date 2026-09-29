@@ -24,11 +24,11 @@ class ThemeSettingsActivity : AppCompatActivity() {
             "auto" to "System"
         )
 
-        themes.forEachIndexed { index, entry ->
+        themes.forEachIndexed { index, (code, label) ->
             val button = RadioButton(this).apply {
                 id = index
-                text = entry.second
-                isChecked = prefs.getTheme() == entry.first
+                text = label
+                isChecked = prefs.getTheme() == code
             }
             group.addView(button)
         }

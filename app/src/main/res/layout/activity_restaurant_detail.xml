@@ -36,7 +36,7 @@
         android:layout_height="56dp"
         android:layout_marginTop="12dp"
         android:backgroundTint="@color/primary"
-        android:text="Order Now"
+        android:text="@string/order_now"
         android:textColor="@color/white" />
 
 </LinearLayout>

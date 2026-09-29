@@ -10,7 +10,7 @@
         android:id="@+id/locationText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Nearby restaurants"
+        android:text="@string/nearby_restaurants"
         android:textColor="@color/text_primary"
         android:textSize="24sp"
         android:textStyle="bold" />
@@ -20,7 +20,7 @@
         android:layout_width="match_parent"
         android:layout_height="56dp"
         android:layout_marginTop="16dp"
-        android:text="Use my location"
+        android:text="@string/use_my_location"
         android:backgroundTint="@color/primary"
         android:textColor="@color/white" />
 
@@ -31,7 +31,7 @@
         android:layout_gravity="end"
         android:layout_marginTop="16dp"
         android:src="@android:drawable/ic_menu_preferences"
-        android:contentDescription="Settings" />
+        android:contentDescription="@string/settings" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/restaurantsRecyclerView"

@@ -35,10 +35,10 @@ class MainActivity : AppCompatActivity() {
     private lateinit var prefs: PreferenceManager
 
     private val restaurants = listOf(
-        Restaurant(1, "Baghdad Grill", "Arabic", 4.9, "20-30 min", "Free over 20K", "Baghdad, Karrada", "Fresh grilled meals and fast delivery.", 33.3152, 44.3661),
-        Restaurant(2, "Basra Feast", "Seafood", 4.8, "25-35 min", "4,000 IQD", "Basra, Al-Ashar", "Seafood specials and family meals.", 30.5369, 47.8203),
-        Restaurant(3, "Erbil Bites", "Fast Food", 4.7, "15-25 min", "3,500 IQD", "Erbil, Center", "Fast and reliable door-to-door eating.", 36.1911, 44.0092),
-        Restaurant(4, "Mosul Pizza", "Pizza", 4.6, "30-40 min", "5,000 IQD", "Mosul, Old City", "Tasty pizza and rich crusts.", 36.3350, 43.1189)
+        Restaurant(1, "Baghdad Grill", "Arabic", 4.9, "20-30 min", "Free over 20K", "Karrada, Baghdad", "Fresh grilled meals and fast delivery.", 33.3152, 44.3661),
+        Restaurant(2, "Basra Feast", "Seafood", 4.8, "25-35 min", "4,000 IQD", "Al-Ashar, Basra", "Seafood specials and family meals.", 30.5369, 47.8203),
+        Restaurant(3, "Erbil Bites", "Fast Food", 4.7, "15-25 min", "3,500 IQD", "Center, Erbil", "Fast and reliable door-to-door eating.", 36.1911, 44.0092),
+        Restaurant(4, "Mosul Pizza", "Pizza", 4.6, "30-40 min", "5,000 IQD", "Old City, Mosul", "Tasty pizza and rich crusts.", 36.3350, 43.1189)
     )
 
     private val permissionLauncher = registerForActivityResult(
@@ -47,9 +47,11 @@ class MainActivity : AppCompatActivity() {
         val allowed = result[Manifest.permission.ACCESS_FINE_LOCATION] == true ||
             result[Manifest.permission.ACCESS_COARSE_LOCATION] == true
 
-        if (allowed) getCurrentLocation() else {
+        if (allowed) {
+            getCurrentLocation()
+        } else {
             Toast.makeText(this, "Location disabled. Showing default order list.", Toast.LENGTH_SHORT).show()
-            showRestaurants(restaurants)
+            render(restaurants)
         }
     }
 
@@ -61,48 +63,46 @@ class MainActivity : AppCompatActivity() {
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
         locationText = findViewById(R.id.locationText)
 
-        val rv = findViewById<RecyclerView>(R.id.restaurantsRecyclerView)
-        rv.layoutManager = LinearLayoutManager(this)
+        val recyclerView = findViewById<RecyclerView>(R.id.restaurantsRecyclerView)
+        recyclerView.layoutManager = LinearLayoutManager(this)
 
         adapter = RestaurantAdapter(restaurants) { restaurant ->
             val intent = Intent(this, RestaurantDetailActivity::class.java)
             intent.putExtra("restaurant", restaurant)
             startActivity(intent)
         }
-        rv.adapter = adapter
+        recyclerView.adapter = adapter
 
         findViewById<Button>(R.id.locationButton).setOnClickListener {
-            askForLocationPermission()
+            requestLocationPermission()
         }
 
         findViewById<ImageButton>(R.id.settingsButton).setOnClickListener {
             startActivity(Intent(this, SettingsActivity::class.java))
         }
 
-        showRestaurants(restaurants)
+        render(restaurants)
     }
 
-    private fun showRestaurants(list: List<Restaurant>) {
-        adapter.updateData(list)
-    }
-
-    private fun askForLocationPermission() {
+    private fun requestLocationPermission() {
         val fineGranted = ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
         val coarseGranted = ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION)
-
         if (fineGranted == PackageManager.PERMISSION_GRANTED || coarseGranted == PackageManager.PERMISSION_GRANTED) {
             getCurrentLocation()
         } else {
-            permissionLauncher.launch(arrayOf(
-                Manifest.permission.ACCESS_FINE_LOCATION,
-                Manifest.permission.ACCESS_COARSE_LOCATION
-            ))
+            permissionLauncher.launch(
+                arrayOf(
+                    Manifest.permission.ACCESS_FINE_LOCATION,
+                    Manifest.permission.ACCESS_COARSE_LOCATION
+                )
+            )
         }
     }
 
     private fun getCurrentLocation() {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
-            ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED
+        ) {
             return
         }
 
@@ -112,12 +112,16 @@ class MainActivity : AppCompatActivity() {
                     distance(location.latitude, location.longitude, restaurant.latitude, restaurant.longitude)
                 }
                 locationText.text = "Current location: ${location.latitude}, ${location.longitude}"
-                showRestaurants(sorted)
+                render(sorted)
             } else {
                 locationText.text = "Location unavailable"
-                showRestaurants(restaurants)
+                render(restaurants)
             }
         }
+    }
+
+    private fun render(list: List<Restaurant>) {
+        adapter.updateData(list)
     }
 
     private fun distance(lat1: Double, lon1: Double, lat2: Double, lon2: Double): Double {

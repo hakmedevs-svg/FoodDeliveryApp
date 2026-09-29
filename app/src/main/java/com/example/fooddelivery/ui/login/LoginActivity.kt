@@ -7,6 +7,7 @@ import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
 import com.example.fooddelivery.R
 import com.example.fooddelivery.data.PreferenceManager
+import com.example.fooddelivery.ui.main.MainActivity
 
 class LoginActivity : AppCompatActivity() {
 
@@ -20,7 +21,7 @@ class LoginActivity : AppCompatActivity() {
 
         prefs = PreferenceManager(this)
         if (prefs.isLoggedIn()) {
-            startActivity(Intent(this, GovernorateSelectionActivity::class.java))
+            startActivity(Intent(this, MainActivity::class.java))
             finish()
             return
         }
@@ -36,7 +37,7 @@ class LoginActivity : AppCompatActivity() {
                 startActivity(Intent(this, GovernorateSelectionActivity::class.java))
                 finish()
             } else {
-                phoneInput.error = "Enter valid Iraqi mobile number"
+                phoneInput.error = getString(R.string.invalid_phone)
             }
         }
     }

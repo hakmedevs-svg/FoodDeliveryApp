@@ -33,11 +33,11 @@ class LanguageSettingsActivity : AppCompatActivity() {
             "ur" to "اردو"
         )
 
-        languages.forEachIndexed { index, entry ->
+        languages.forEachIndexed { index, (code, label) ->
             val button = RadioButton(this).apply {
                 id = index
-                text = entry.second
-                isChecked = prefs.getLanguage() == entry.first
+                text = label
+                isChecked = prefs.getLanguage() == code
             }
             group.addView(button)
         }

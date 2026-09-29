@@ -1,64 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginStart="12dp"
-    android:layout_marginTop="8dp"
-    android:layout_marginEnd="12dp"
-    android:layout_marginBottom="8dp"
-    app:cardCornerRadius="18dp"
-    app:cardElevation="5dp">
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="16dp">
-
-        <TextView
-            android:id="@+id/restaurantTitle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Restaurant Name"
-            android:textColor="@color/text_primary"
-            android:textSize="22sp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/restaurantCuisine"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:text="Cuisine"
-            android:textColor="@color/text_secondary"
-            android:textSize="14sp" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/restaurantRating"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@color/accent"
-                android:padding="8dp"
-                android:text="★ 4.8"
-                android:textColor="@color/white"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/restaurantInfo"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="12dp"
-                android:layout_weight="1"
-                android:text="25-35 دقيقة • 10 ريال"
-                android:textColor="@color/text_primary"
-                android:textSize="15sp" />
-        </LinearLayout>
-    </LinearLayout>
-</androidx.cardview.widget.CardView>
+<resources>
+    <string name="app_name">تطبيق التوصيل</string>
+    <string name="welcome">مرحباً</string>
+    <string name="phone_hint">أدخل رقم الهاتف</string>
+    <string name="login">تسجيل الدخول</string>
+    <string name="continue_text">متابعة</string>
+    <string name="choose_governorate">اختر المحافظة</string>
+    <string name="nearby_restaurants">المطاعم القريبة</string>
+    <string name="use_my_location">استخدم موقعي</string>
+    <string name="settings">الإعدادات</string>
+    <string name="language">اللغة</string>
+    <string name="theme">المظهر</string>
+    <string name="privacy_policy">سياسة الخصوصية</string>
+    <string name="terms_of_use">شروط الاستخدام</string>
+    <string name="about">حول التطبيق</string>
+    <string name="logout">تسجيل الخروج</string>
+    <string name="notifications">الإشعارات</string>
+    <string name="delivery_time">وقت التوصيل</string>
+    <string name="delivery_fee">رسوم التوصيل</string>
+    <string name="order_now">اطلب الآن</string>
+    <string name="invalid_phone">يرجى إدخال رقم هاتف عراقي صحيح.</string>
+    <string name="login_success">تم تسجيل الدخول بنجاح.</string>
+    <string name="choose_language">اختر اللغة</string>
+    <string name="choose_theme">اختر المظهر</string>
+</resources>

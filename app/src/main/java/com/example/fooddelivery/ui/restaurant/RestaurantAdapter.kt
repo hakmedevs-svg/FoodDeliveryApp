@@ -11,7 +11,7 @@ import com.example.fooddelivery.data.Restaurant
 
 class RestaurantAdapter(
     private var items: List<Restaurant>,
-    private val onItemClick: (Restaurant) -> Unit
+    private val onClick: (Restaurant) -> Unit
 ) : RecyclerView.Adapter<RestaurantAdapter.RestaurantViewHolder>() {
 
     class RestaurantViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -20,17 +20,17 @@ class RestaurantAdapter(
         private val info: TextView = itemView.findViewById(R.id.restaurantInfo)
         private val orderButton: Button = itemView.findViewById(R.id.orderButton)
 
-        fun bind(restaurant: Restaurant, onClick: (Restaurant) -> Unit) {
+        fun bind(restaurant: Restaurant, action: (Restaurant) -> Unit) {
             name.text = restaurant.name
             cuisine.text = restaurant.cuisine
             info.text = "${restaurant.deliveryTime} • ${restaurant.deliveryFee} • ${restaurant.rating}★"
-            itemView.setOnClickListener { onClick(restaurant) }
-            orderButton.setOnClickListener { onClick(restaurant) }
+            itemView.setOnClickListener { action(restaurant) }
+            orderButton.setOnClickListener { action(restaurant) }
         }
     }
 
-    fun updateData(data: List<Restaurant>) {
-        items = data
+    fun updateData(newItems: List<Restaurant>) {
+        items = newItems
         notifyDataSetChanged()
     }
 
@@ -41,7 +41,7 @@ class RestaurantAdapter(
     }
 
     override fun onBindViewHolder(holder: RestaurantViewHolder, position: Int) {
-        holder.bind(items[position], onItemClick)
+        holder.bind(items[position], onClick)
     }
 
     override fun getItemCount(): Int = items.size

@@ -14,3 +14,4 @@ data class Restaurant(
     val latitude: Double,
     val longitude: Double
 ) : Serializable
+

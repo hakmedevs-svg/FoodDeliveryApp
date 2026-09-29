@@ -26,8 +26,7 @@ class RestaurantDetailActivity : AppCompatActivity() {
         findViewById<TextView>(R.id.restaurantCuisine).text = restaurant.cuisine
         findViewById<TextView>(R.id.restaurantInfo).text = "${restaurant.deliveryTime} • ${restaurant.deliveryFee} • ${restaurant.rating}★"
 
-        val orderButton = findViewById<Button>(R.id.orderButton)
-        orderButton.setOnClickListener {
+        findViewById<Button>(R.id.orderButton).setOnClickListener {
             Toast.makeText(this, "Order placed for ${restaurant.name}", Toast.LENGTH_SHORT).show()
         }
     }

@@ -11,7 +11,7 @@ class PreferenceManager(context: Context) {
 
     private val prefs = EncryptedSharedPreferences.create(
         "secure_food_delivery",
-        MasterKey.DEFAULT_MASTER_KEY_ALIAS,
+        masterKey,
         context,
         EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
         EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM
@@ -33,7 +33,7 @@ class PreferenceManager(context: Context) {
         prefs.edit().putString("language", language).apply()
     }
 
-    fun getLanguage(): String = prefs.getString("language", "en") ?: "en"
+    fun getLanguage(): String = prefs.getString("language", "ar") ?: "ar"
 
     fun saveTheme(theme: String) {
         prefs.edit().putString("theme", theme).apply()
