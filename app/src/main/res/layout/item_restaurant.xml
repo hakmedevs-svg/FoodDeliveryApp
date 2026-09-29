@@ -1,0 +1,33 @@
+package com.example.fooddelivery
+
+import android.os.Bundle
+import android.widget.Button
+import android.widget.TextView
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+
+class RestaurantDetailActivity : AppCompatActivity() {
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_restaurant_detail)
+
+        val restaurant = intent.getSerializableExtra("restaurant") as? Restaurant
+
+        if (restaurant == null) {
+            Toast.makeText(this, "لم يتم العثور على تفاصيل المطعم", Toast.LENGTH_SHORT).show()
+            finish()
+            return
+        }
+
+        findViewById<TextView>(R.id.restaurantName).text = restaurant.name
+        findViewById<TextView>(R.id.restaurantCuisine).text = restaurant.cuisine
+        findViewById<TextView>(R.id.restaurantRating).text = "★ ${restaurant.rating}"
+        findViewById<TextView>(R.id.restaurantDeliveryInfo).text = "${restaurant.deliveryTime} | ${restaurant.deliveryFee}"
+        findViewById<TextView>(R.id.restaurantAddress).text = restaurant.address
+
+        findViewById<Button>(R.id.orderButton)?.setOnClickListener {
+            Toast.makeText(this, "تمت إضافة الطلب إلى السلة!", Toast.LENGTH_SHORT).show()
+        }
+    }
+}

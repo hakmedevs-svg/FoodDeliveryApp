@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Food Delivery</string>
+    <string name="nearby_restaurants">مطاعم قريبة</string>
+    <string name="use_my_location">استخدم موقعي</string>
+    <string name="loading_location">جارٍ تحديد موقعك…</string>
+    <string name="restaurant_details">تفاصيل المطعم</string>
+    <string name="delivery_time">وقت التوصيل</string>
+    <string name="delivery_fee">رسوم التوصيل</string>
+    <string name="rating">التقييم</string>
+    <string name="address">العنوان</string>
+    <string name="order_now">اطلب الآن</string>
+</resources>
