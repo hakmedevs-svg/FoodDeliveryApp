@@ -6,50 +6,41 @@ import android.widget.RadioGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import com.example.fooddelivery.R
-import com.example.fooddelivery.data.local.PreferenceManager
+import com.example.fooddelivery.data.PreferenceManager
 
 class ThemeSettingsActivity : AppCompatActivity() {
 
-    private lateinit var preferenceManager: PreferenceManager
+    private lateinit var prefs: PreferenceManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_theme_settings)
+        prefs = PreferenceManager(this)
 
-        preferenceManager = PreferenceManager(this)
-
-        val radioGroup = findViewById<RadioGroup>(R.id.themeRadioGroup)
-        val currentTheme = preferenceManager.getTheme()
-
-        val themes = mapOf(
+        val group = findViewById<RadioGroup>(R.id.themeGroup)
+        val themes = listOf(
             "light" to "Light",
             "dark" to "Dark",
-            "auto" to "Auto (System)"
+            "auto" to "System"
         )
 
-        themes.forEach { (themeCode, themeName) ->
-            val radioButton = RadioButton(this).apply {
-                id = themes.keys.toList().indexOf(themeCode)
-                text = themeName
-                isChecked = themeCode == currentTheme
-                textSize = 16f
-                setPadding(16, 16, 16, 16)
+        themes.forEachIndexed { index, entry ->
+            val button = RadioButton(this).apply {
+                id = index
+                text = entry.second
+                isChecked = prefs.getTheme() == entry.first
             }
-            radioGroup.addView(radioButton)
+            group.addView(button)
         }
 
-        radioGroup.setOnCheckedChangeListener { _, checkedId ->
-            val themeCode = themes.keys.toList()[checkedId]
-            preferenceManager.setTheme(themeCode)
-            applyTheme(themeCode)
-        }
-    }
-
-    private fun applyTheme(theme: String) {
-        when (theme) {
-            "light" -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-            "dark" -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-            "auto" -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
+        group.setOnCheckedChangeListener { _, checkedId ->
+            val selected = themes[checkedId].first
+            prefs.saveTheme(selected)
+            when (selected) {
+                "light" -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+                "dark" -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+                else -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
+            }
         }
     }
 }

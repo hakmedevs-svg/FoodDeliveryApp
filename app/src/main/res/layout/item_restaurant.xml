@@ -1,33 +1,56 @@
-package com.example.fooddelivery
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="12dp"
+    app:cardCornerRadius="16dp"
+    app:cardElevation="4dp">
 
-import android.os.Bundle
-import android.widget.Button
-import android.widget.TextView
-import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
 
-class RestaurantDetailActivity : AppCompatActivity() {
+        <TextView
+            android:id="@+id/restaurantName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Restaurant Name"
+            android:textColor="@color/text_primary"
+            android:textSize="22sp"
+            android:textStyle="bold" />
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_restaurant_detail)
+        <TextView
+            android:id="@+id/restaurantCuisine"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Cuisine"
+            android:textColor="@color/text_secondary"
+            android:textSize="14sp" />
 
-        val restaurant = intent.getSerializableExtra("restaurant") as? Restaurant
+        <TextView
+            android:id="@+id/restaurantRating"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:background="@color/accent"
+            android:padding="8dp"
+            android:text="★ 4.0"
+            android:textColor="@color/white"
+            android:textStyle="bold" />
 
-        if (restaurant == null) {
-            Toast.makeText(this, "لم يتم العثور على تفاصيل المطعم", Toast.LENGTH_SHORT).show()
-            finish()
-            return
-        }
+        <TextView
+            android:id="@+id/restaurantInfo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:text="Delivery time"
+            android:textColor="@color/text_primary"
+            android:textSize="16sp" />
 
-        findViewById<TextView>(R.id.restaurantName).text = restaurant.name
-        findViewById<TextView>(R.id.restaurantCuisine).text = restaurant.cuisine
-        findViewById<TextView>(R.id.restaurantRating).text = "★ ${restaurant.rating}"
-        findViewById<TextView>(R.id.restaurantDeliveryInfo).text = "${restaurant.deliveryTime} | ${restaurant.deliveryFee}"
-        findViewById<TextView>(R.id.restaurantAddress).text = restaurant.address
+    </LinearLayout>
 
-        findViewById<Button>(R.id.orderButton)?.setOnClickListener {
-            Toast.makeText(this, "تمت إضافة الطلب إلى السلة!", Toast.LENGTH_SHORT).show()
-        }
-    }
-}
+</androidx.cardview.widget.CardView>

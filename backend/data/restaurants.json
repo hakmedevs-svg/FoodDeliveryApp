@@ -1,0 +1,50 @@
+[
+  {
+    "id": 1,
+    "name": "Baghdad Grill",
+    "cuisine": "Arabic",
+    "governorate": "Baghdad",
+    "rating": 4.9,
+    "deliveryTime": "20-30 min",
+    "deliveryFee": "Free over 20K",
+    "address": "Karrada, Baghdad",
+    "latitude": 33.3152,
+    "longitude": 44.3661
+  },
+  {
+    "id": 2,
+    "name": "Basra Feast",
+    "cuisine": "Seafood",
+    "governorate": "Basra",
+    "rating": 4.8,
+    "deliveryTime": "25-35 min",
+    "deliveryFee": "4000 IQD",
+    "address": "Al-Ashar, Basra",
+    "latitude": 30.5369,
+    "longitude": 47.8203
+  },
+  {
+    "id": 3,
+    "name": "Erbil Bites",
+    "cuisine": "Fast Food",
+    "governorate": "Erbil",
+    "rating": 4.7,
+    "deliveryTime": "15-25 min",
+    "deliveryFee": "3500 IQD",
+    "address": "Center, Erbil",
+    "latitude": 36.1911,
+    "longitude": 44.0092
+  },
+  {
+    "id": 4,
+    "name": "Mosul Pizza",
+    "cuisine": "Pizza",
+    "governorate": "Nineveh",
+    "rating": 4.6,
+    "deliveryTime": "30-40 min",
+    "deliveryFee": "5000 IQD",
+    "address": "Old City, Mosul",
+    "latitude": 36.3350,
+    "longitude": 43.1189
+  }
+]

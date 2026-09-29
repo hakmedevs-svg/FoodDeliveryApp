@@ -1,35 +1,38 @@
-# FoodDeliveryApp
+# Android Food Delivery App
 
-تطبيق Android بسيط لتوصيل الطعام يوضح المطاعم القريبة وفقاً للموقع الحالي للمستخدم، مع تفاصيل المطعم وتقييمه وسعر التوصيل ووقت التوصيل.
+This project is a complete starter for a food delivery Android app with:
 
-## مميزات المشروع
-- شاشة رئيسية تعرض قائمة المطاعم القريبة
-- استخدام صلاحية الموقع للمستخدم
-- حساب المسافة التقريبية بين المستخدم والمطعم
-- تفاصيل المطعم عند النقر عليه
-- تصميم مناسب لتطبيقات الطلبات والتوصيل
+- Kotlin Android app
+- secure encrypted local storage
+- phone login flow
+- Iraqi governorates selection
+- nearby restaurant list
+- settings section with language and theme switching
+- privacy policy and terms inside the app
+- backend API folder for Node.js/Express
+- sample restaurant and governorate data
+- Firebase-ready integration setup
 
-## المتطلبات
-- Android Studio Ladybug أو أحدث
-- JDK 17
-- Android SDK
+## Project structure
 
-## التشغيل
-1. افتح المشروع في Android Studio.
-2. دع Android Studio يقوم بمزامنة Gradle.
-3. اختر جهاز حقيقي أو محاكي.
-4. اضغط Run.
+- `app/` Android project
+- `backend/` Node.js API and mocked JSON data
 
-## هيكل المشروع
-- app/src/main/java/com/example/fooddelivery
-- app/src/main/res/layout
-- app/src/main/res/values
-- app/src/main/AndroidManifest.xml
+## Android Studio
 
-## ملاحظات
-هذا التطبيق هو نسخة أولية (MVP) ومصممة لتكون قاعدة جيدة لتوسيعها لاحقاً بإضافة:
-- Firebase Auth
-- Firebase Firestore / Realtime Database
-- خرائط Google Maps
-- نظام الدفع
-- تتبع الطلبات
+Open the repo in Android Studio and let Gradle sync. The project is structured so you can extend it with Firebase Authentication, Firestore, and Google Maps.
+
+## Backend
+
+```bash
+cd backend
+npm install
+cp .env.example .env
+npm start
+```
+
+## Notes
+
+- Add your real Firebase config and service account to connect to live backend data.
+- Replace mock phone validation with Firebase Phone Auth for production.
+- Add real Google Maps API key in the Android manifest / Maps configuration for live geolocation.

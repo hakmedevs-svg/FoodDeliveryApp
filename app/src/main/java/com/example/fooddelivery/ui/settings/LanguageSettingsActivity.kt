@@ -5,40 +5,46 @@ import android.widget.RadioButton
 import android.widget.RadioGroup
 import androidx.appcompat.app.AppCompatActivity
 import com.example.fooddelivery.R
-import com.example.fooddelivery.data.local.PreferenceManager
-import com.example.fooddelivery.data.model.AvailableLanguages
+import com.example.fooddelivery.data.PreferenceManager
 
 class LanguageSettingsActivity : AppCompatActivity() {
 
-    private lateinit var preferenceManager: PreferenceManager
+    private lateinit var prefs: PreferenceManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_language_settings)
+        prefs = PreferenceManager(this)
 
-        preferenceManager = PreferenceManager(this)
+        val group = findViewById<RadioGroup>(R.id.languageGroup)
+        val languages = listOf(
+            "ar" to "العربية",
+            "en" to "English",
+            "fr" to "Français",
+            "es" to "Español",
+            "de" to "Deutsch",
+            "it" to "Italiano",
+            "pt" to "Português",
+            "ru" to "Русский",
+            "ja" to "日本語",
+            "ko" to "한국어",
+            "zh" to "中文",
+            "tr" to "Türkçe",
+            "ur" to "اردو"
+        )
 
-        val radioGroup = findViewById<RadioGroup>(R.id.languageRadioGroup)
-        val currentLanguage = preferenceManager.getLanguage()
-
-        // Create radio buttons for each language
-        AvailableLanguages.languages.forEachIndexed { index, language ->
-            val radioButton = RadioButton(this).apply {
+        languages.forEachIndexed { index, entry ->
+            val button = RadioButton(this).apply {
                 id = index
-                text = "${language.flag} ${language.nativeName}"
-                isChecked = language.code == currentLanguage
-                textSize = 16f
-                setPadding(16, 16, 16, 16)
+                text = entry.second
+                isChecked = prefs.getLanguage() == entry.first
             }
-            radioGroup.addView(radioButton)
+            group.addView(button)
         }
 
-        radioGroup.setOnCheckedChangeListener { _, checkedId ->
-            if (checkedId >= 0 && checkedId < AvailableLanguages.languages.size) {
-                val selectedLanguage = AvailableLanguages.languages[checkedId]
-                preferenceManager.setLanguage(selectedLanguage.code)
-                // In production, recreate activity or restart app to apply language
-            }
+        group.setOnCheckedChangeListener { _, checkedId ->
+            val selected = languages[checkedId].first
+            prefs.saveLanguage(selected)
         }
     }
 }
